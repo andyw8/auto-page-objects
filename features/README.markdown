@@ -1,0 +1,1 @@
+This project is an experiment in auto generating page object models by annotating HTML markup with some HTML5 data attributes.
