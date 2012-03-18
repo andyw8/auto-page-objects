@@ -7,16 +7,49 @@ Feature: Collections
 
   Scenario: A list
 
+    The data-name attribute indicates which part of the collection member to extract
+
     Given the following HTML fragment:
       """html
       <ul data-collection="products">
-        <li data-condition="new">Car</span>
-        <li data-condition="used">Boat</span>
+        <li data-name>Car</li>
+        <li data-name>Boat</li>
       </ul>
       """
-    Then the page should have the representation:
+    Then #data should return:
+      """ruby
+      {:products=>["Car", "Boat"]}
+      """
+
+  Scenario: A list with inline attributes but no name
+
+    Given the following HTML fragment:
+      """html
+      <ul data-collection="products">
+        <li data-condition="new">Car</li>
+        <li data-condition="used">Boat</li>
+      </ul>
+      """
+    Then #data should return:
       """ruby
       {:products => [{:condition => 'new'}, {:condition => 'used'}]}
+      """
+
+  Scenario: A list with inline attributes and names
+
+    Given the following HTML fragment:
+      """html
+      <ul data-collection="products">
+        <li data-condition="new" data-name>Car</li>
+        <li data-condition="used" data-name>Boat</li>
+      </ul>
+      """
+    Then #data should return:
+      """ruby
+      {:products=>[
+        {"Car" => {:condition=>"new"}},
+        {"Boat" => {:condition=>"used"}}]
+      }
       """
 
   Scenario: A table
@@ -32,7 +65,7 @@ Feature: Collections
         </tr>
       </table>
       """
-    Then the page should have the representation:
+    Then #data should return:
       """ruby
       {:products => [{:condition => 'new'}, {:condition => 'used'}]}
       """
@@ -44,11 +77,11 @@ Feature: Collections
     Given the following HTML fragment:
       """html
       <ul data-collection="products">
-        <li data-condition="new" data-name>Car</span>
-        <li data-condition="used" data-name>Boat</span>
+        <li data-condition="new" data-name>Car</li>
+        <li data-condition="used" data-name>Boat</li>
       </ul>
       """
-    Then the page should have the representation:
+    Then #data should return:
       """ruby
       {
         :products => [
@@ -67,11 +100,11 @@ Feature: Collections
     Given the following HTML fragment:
       """html
       <ul data-collection="products">
-        <li data-name>Car</span>
-        <li data-name>Boat</span>
+        <li data-name>Car</li>
+        <li data-name>Boat</li>
       </ul>
       """
-    Then the page should have the representation:
+    Then #data should return:
       """ruby
       {
         :products => ['Car', 'Boat']
@@ -91,7 +124,7 @@ Feature: Collections
         <li data-available="no" data-name>Engine Inspection</span>
       </ul>
       """
-    Then the page should have the representation:
+    Then #data should return:
       """ruby
       {
         :products => [
