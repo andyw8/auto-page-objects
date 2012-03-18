@@ -16,9 +16,9 @@ Feature: Collections
         <li data-name>Boat</li>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
-      {:products=>["Car", "Boat"]}
+      {products: ["Car", "Boat"]}
       """
 
   Scenario: A list with inline attributes but no name
@@ -30,9 +30,9 @@ Feature: Collections
         <li data-condition="used">Boat</li>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
-      {:products => [{:condition => 'new'}, {:condition => 'used'}]}
+      {products: [{condition: 'new'}, {condition: 'used'}]}
       """
 
   Scenario: A list with inline attributes and names
@@ -44,11 +44,11 @@ Feature: Collections
         <li data-condition="used" data-name>Boat</li>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
       {:products=>[
-        {"Car" => {:condition=>"new"}},
-        {"Boat" => {:condition=>"used"}}]
+        {"Car" => {condition: "new"}},
+        {"Boat"  => {condition: "used"}}]
       }
       """
 
@@ -65,9 +65,9 @@ Feature: Collections
         </tr>
       </table>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
-      {:products => [{:condition => 'new'}, {:condition => 'used'}]}
+      {products: [{condition: 'new'}, {condition: 'used'}]}
       """
 
   Scenario: A list, with names specified
@@ -81,15 +81,15 @@ Feature: Collections
         <li data-condition="used" data-name>Boat</li>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
       {
-        :products => [
+        products: [
           {"Car" => {
-            :condition => "new"}
+            condition: "new"}
           },
           {"Boat" => {
-            :condition => "used"}
+            condition: "used"}
           }
         ]
       }
@@ -104,10 +104,10 @@ Feature: Collections
         <li data-name>Boat</li>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
       {
-        :products => ['Car', 'Boat']
+        products: ['Car', 'Boat']
       }
       """
 
@@ -124,23 +124,23 @@ Feature: Collections
         <li data-available="no" data-name>Engine Inspection</span>
       </ul>
       """
-    Then #data should return:
+    Then the page object data should be:
       """ruby
       {
-        :products => [
+        products: [
           {"Car" => {
-            :condition => "new"}
+            condition: "new"}
           },
           {"Boat" => {
-            :condition => "used"}
+            condition: "used"}
           }
         ],
-        :services => [
+        services: [
           {"Wash" => {
-            :available => "yes"}
+            available: "yes"}
           },
           {"Engine Inspection" => {
-            :available => "no"}
+            available: "no"}
           }
         ]
       }

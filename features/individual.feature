@@ -9,11 +9,11 @@ Feature: Individual
       <span data-opening-time class="foo">9am</span>
       <span data-closing-time class="bar">6pm</span>
       """
-    Then the page should have the representation:
+    Then the page object data should be:
       """ruby
       {
-        :opening_time => '9am',
-        :closing_time => '6pm'
+        opening_time: '9am',
+        closing_time: '6pm'
       }
       """
 
@@ -25,15 +25,15 @@ Feature: Individual
       """html
       <span data-product-name data-sku="12345">6pm</span>
       """
-    Then the page should have the representation:
+    Then the page object data should be:
       """ruby
-      {:product_name => '6pm', :sku => '12345'}
+      {product_name: '6pm', sku: '12345'}
       """
 
   Scenario: Empty HTML fragment
 
     Given an empty HTML fragment
-    Then the page should have the representation:
+    Then the page object data should be:
       """ruby
       {}
       """
@@ -49,7 +49,7 @@ Feature: Individual
         <li>Boat</span>
       </ul>
       """
-    Then the page should have the representation:
+    Then the page object data should be:
       """ruby
       {}
       """
